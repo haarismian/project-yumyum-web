@@ -12,28 +12,40 @@ app.use(express.json());
 
 //Get all recipes
 app.get('/API/v1/recipes', async (req, res) => {
-  const results = await db.query('SELECT * FROM recipes');
+  try {
+    const results = await db.query('SELECT * FROM recipes');
 
-  console.log(results);
+    console.log(results.rows);
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      recipes: ['Big mac', 'Little mac'],
-    },
-  });
+    res.status(200).json({
+      status: 'success',
+      results: results.rows.length,
+      data: {
+        recipes: results.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Get single recipe
-app.get('/API/v1/recipes/:recipe_id', (req, res) => {
-  console.log(req.params);
+app.get('/API/v1/recipes/:recipe_id', async (req, res) => {
+  try {
+    const results = await db.query('SELECT * FROM recipes WHERE id = $1;', [
+      req.params.recipe_id,
+    ]);
 
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      recipe: 'Big Mac',
-    },
-  });
+    res.status(200).json({
+      status: 'success',
+      results: results.rows.length,
+      data: {
+        recipes: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // POST a  single recipe
