@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 
+const db = require('./db');
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -9,8 +11,11 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //Get all recipes
-app.get('/API/v1/recipes', (req, res) => {
-  console.log('get all recipes route has been hit backend');
+app.get('/API/v1/recipes', async (req, res) => {
+  const results = await db.query('SELECT * FROM recipes');
+
+  console.log(results);
+
   res.status(200).json({
     status: 'success',
     data: {
