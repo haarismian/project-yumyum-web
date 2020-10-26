@@ -9,3 +9,5 @@ CREATE TABLE recipes (
 );
 INSERT INTO recipes (name, cuisine, price_range)
 VALUES ('Butter Chicken', 'Indian', 2);
+INSERT INTO recipes (name, cuisine, price_range)
+VALUES ('Pizza', 'Italian', 1);

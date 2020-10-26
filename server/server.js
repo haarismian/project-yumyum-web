@@ -32,6 +32,8 @@ app.get('/API/v1/recipes', async (req, res) => {
 // Get single recipe
 app.get('/API/v1/recipes/:recipe_id', async (req, res) => {
   try {
+    //Should never use string interpolation or template literals (taking string from front end into query), but to instead use this "parameterized query" thanks to pg library
+    //This $1 represents the first value of the array. Look up pg docs
     const results = await db.query('SELECT * FROM recipes WHERE id = $1;', [
       req.params.recipe_id,
     ]);
