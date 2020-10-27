@@ -6,6 +6,7 @@ const db = require('./db');
 
 const app = express();
 
+//morgan used for logging
 app.use(morgan('dev'));
 
 app.use(express.json());
