@@ -57,6 +57,7 @@ app.post('/API/v1/recipes', async (req, res) => {
   console.log(req.body);
   try {
     const results = await db.query(
+      //returning * will give us back the response from here
       'INSERT INTO recipes (name, cuisine, price_range) values ($1, $2, $3) returning *',
       [req.body.name, req.body.cuisine, req.body.price_range]
     );
