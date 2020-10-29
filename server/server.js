@@ -14,7 +14,7 @@ app.use(express.json());
 //Get all recipes
 app.get('/API/v1/recipes', async (req, res) => {
   try {
-    const results = await db.query('SELECT * FROM recipes');
+    const results = await db.query('SELECT * FROM recipes ORDER BY id ASC');
 
     console.log(results.rows);
 
