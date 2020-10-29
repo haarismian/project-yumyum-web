@@ -75,8 +75,27 @@ app.post('/API/v1/recipes', async (req, res) => {
 
 // UPDATE a  single recipe TODO
 app.put('/API/v1/recipes/:recipe_id', async (req, res) => {
-  console.log(req.params.recipe_id);
-  console.log(req.body);
+  try {
+    const results = await db.query(
+      // id in the DB should always be passed as recipe_id
+      'UPDATE recipes SET name = $1, cuisine = $2, price_range = $3 where id = $4 returning *;',
+      [
+        req.body.name,
+        req.body.cuisine,
+        req.body.price_range,
+        req.params.recipe_id,
+      ]
+    );
+    console.log(results);
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        recipe: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 
   // try {
   //   const results = await db.query(
