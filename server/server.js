@@ -52,16 +52,23 @@ app.get('/API/v1/recipes/:recipe_id', async (req, res) => {
 });
 
 // POST a  single recipe
-app.post('/API/v1/recipes', (req, res) => {
-  console.log(req.body);
-
-  res.status(201).json({
-    status: 'Success',
-
-    data: {
-      recipe: 'Big Mac',
-    },
-  });
+app.post('/API/v1/recipes', async (req, res) => {
+  //params is for route parameters (the /:id stuff) and body is for the actual request contents
+  try {
+    const results = await db.query(
+      'INSERT INTO recipes (name, cuisine, price_range) values ($1, $2, $3)',
+      [req.body.name.req.body.cuisine, req.body.price_range]
+    );
+    console.log(results);
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        recipe: 'Big Mac',
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // UPDATE a  single recipe TODO
@@ -69,20 +76,21 @@ app.put('/API/v1/recipes/:recipe_id', async (req, res) => {
   console.log(req.params.recipe_id);
   console.log(req.body);
 
-  try {
-    const results = await db.query(
-      'INSERT INTO recipes (name, cuisine, price_range) values ($1, $2, $3)',
-      [req.params.name.req.params.cuisine, req.params.price_range]
-    );
-    res.status(200).json({
-      status: 'Success',
-      data: {
-        recipe: 'Big Mac',
-      },
-    });
-  } catch (error) {
-    console.log(err);
-  }
+  // try {
+  //   const results = await db.query(
+  //     'INSERT INTO recipes (name, cuisine, price_range) values ($1, $2, $3)',
+  //     [req.params.name.req.params.cuisine, req.params.price_range]
+  //   );
+  //   console.log(results);
+  //   res.status(200).json({
+  //     status: 'Success',
+  //     data: {
+  //       recipe: 'Big Mac',
+  //     },
+  //   });
+  // } catch (error) {
+  //   console.log(err);
+  // }
 });
 
 // DELETE a  single recipe TO DO
