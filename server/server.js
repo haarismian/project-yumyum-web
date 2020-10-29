@@ -99,10 +99,22 @@ app.put('/API/v1/recipes/:recipe_id', async (req, res) => {
 });
 
 // DELETE a  single recipe TO DO
-app.delete('/API/v1/recipes/:recipe_id', (req, res) => {
-  res.status(204).json({
-    status: 'Success',
-  });
+app.delete('/API/v1/recipes/:recipe_id', async (req, res) => {
+  try {
+    const results = await db.query(
+      'DELETE FROM recipes WHERE id = $1 returning *;',
+      [req.params.recipe_id]
+    );
+    console.log(results);
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        recipe: results.rows[0],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 const PORT = process.env.PORT || 3005;
