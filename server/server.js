@@ -65,16 +65,24 @@ app.post('/API/v1/recipes', (req, res) => {
 });
 
 // UPDATE a  single recipe TODO
-app.put('/API/v1/recipes/:recipe_id', (req, res) => {
+app.put('/API/v1/recipes/:recipe_id', async (req, res) => {
   console.log(req.params.recipe_id);
   console.log(req.body);
 
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      recipe: 'Big Mac',
-    },
-  });
+  try {
+    const results = await db.query(
+      'INSERT INTO recipes (name, cuisine, price_range) values ($1, $2, $3)',
+      [req.params.name.req.params.cuisine, req.params.price_range]
+    );
+    res.status(200).json({
+      status: 'Success',
+      data: {
+        recipe: 'Big Mac',
+      },
+    });
+  } catch (error) {
+    console.log(err);
+  }
 });
 
 // DELETE a  single recipe TO DO
