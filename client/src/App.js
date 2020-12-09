@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 
-import RecipeCard from './components/RecipeCard';
+import db from './db';
+
+import RecipeGallery from './RecipeGallery/RecipeGallery';
 
 function App() {
   return (
     <div className="App">
-      <RecipeCard />
+      <RecipeGallery recipes={db} />
     </div>
   );
 }
