@@ -3,19 +3,30 @@ import React from 'react';
 import RecipeCard from '../components/RecipeCard';
 import { recipes } from '../db';
 
-export default class RecipeGallery extends React.Component {
-  constructor(props) {
-    super(props);
-    this.recipes = this.props.recipes;
-  }
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+} from 'react-router-dom';
 
-  render() {
-    return (
-      <div>
-        {recipes.map((recipe) => {
-          return <RecipeCard />;
-        })}
-      </div>
-    );
-  }
+function RecipeGallery(props) {
+  let match = useRouteMatch();
+  const recipes = props.recipes;
+
+  return (
+    <div>
+      {recipes.map((recipe) => {
+        return (
+          <Link to={`${match.url}/${recipe.recipe_id}`}>
+            <RecipeCard />
+          </Link>
+        );
+      })}
+    </div>
+  );
 }
+
+export default RecipeGallery;
