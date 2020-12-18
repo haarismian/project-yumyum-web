@@ -1,6 +1,7 @@
 import React from 'react';
 
 import RecipeCard from '../components/RecipeCard';
+import RecipePage from '../RecipePage/RecipePage';
 import { recipes } from '../db';
 
 import {
@@ -18,13 +19,20 @@ function RecipeGallery(props) {
 
   return (
     <div>
-      {recipes.map((recipe) => {
-        return (
-          <Link to={`${match.url}/${recipe.recipe_id}`}>
-            <RecipeCard />
-          </Link>
-        );
-      })}
+      <Switch>
+        <Route path={`${match.path}/:recipe_id`}>
+          <RecipePage />
+        </Route>
+        <Route path={match.path}>
+          {recipes.map((recipe) => {
+            return (
+              <Link to={`${match.url}/${recipe.recipe_id}`}>
+                <RecipeCard />
+              </Link>
+            );
+          })}
+        </Route>
+      </Switch>
     </div>
   );
 }

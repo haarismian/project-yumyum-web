@@ -11,7 +11,7 @@ import {
 
 function RecipePage() {
   let { recipe_id } = useParams();
-  return <h3>Requested topic ID:{recipe_id}</h3>;
+  return <h3>Requested recipe ID:{recipe_id}</h3>;
 }
 
 export default RecipePage;

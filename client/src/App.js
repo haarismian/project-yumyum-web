@@ -17,9 +17,15 @@ import RecipePage from './RecipePage/RecipePage';
 
 function App() {
   return (
-    <div className="App">
-      <RouterStuff />
-      <Router>
+    <Router>
+      <div className="App">
+        {/* <RouterStuff /> */}
+        <ul>
+          <li>
+            <Link to="/recipes">Recipes</Link>
+          </li>
+        </ul>
+
         <Switch>
           <Route path="/recipes">
             <RecipeGallery recipes={db.recipes} />
@@ -28,8 +34,8 @@ function App() {
             <RecipePage />
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 }
 
