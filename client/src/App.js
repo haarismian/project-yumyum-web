@@ -12,30 +12,33 @@ import {
 
 import db from './db';
 
+import NavigationBar from './NavigationBar/NavigationBar';
 import RecipeGallery from './RecipeGallery/RecipeGallery';
+import EditRecipe from './RecipePage/EditRecipe';
 import RecipePage from './RecipePage/RecipePage';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        {/* <RouterStuff /> */}
-        <ul>
-          <li>
-            <Link to="/recipes">Recipes</Link>
-          </li>
-        </ul>
+    <div>
+      <Router>
+        <NavigationBar />
 
-        <Switch>
-          <Route path="/recipes">
-            <RecipeGallery recipes={db.recipes} />
-          </Route>
-          <Route path="/recipes/:recipe_id">
+        <div className="App">
+          {/* <RouterStuff /> */}
+          <Switch>
+            <Route path="/recipes">
+              <RecipeGallery recipes={db.recipes} />
+            </Route>
+            <Route path="/new_recipe">
+              <EditRecipe />
+            </Route>
+            {/* <Route path="/recipes/:recipe_id">
             <RecipePage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          </Route> */}
+          </Switch>
+        </div>
+      </Router>
+    </div>
   );
 }
 

@@ -4,6 +4,8 @@ import RecipeCard from '../components/RecipeCard';
 import RecipePage from '../RecipePage/RecipePage';
 import { recipes } from '../db';
 
+import './RecipeGallery.css';
+
 import {
   BrowserRouter as Router,
   Switch,
