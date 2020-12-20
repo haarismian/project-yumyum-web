@@ -13,6 +13,7 @@ export default class RecipeDirectionsEditor extends React.Component {
   render() {
     return (
       <div>
+        <text>the rich text editor is below but invisible for some reason</text>
         <Editor editorState={this.state.editorState} onChange={this.onChange} />
       </div>
     );
