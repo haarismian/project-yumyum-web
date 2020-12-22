@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Form, TimePicker, InputNumber, Input } from 'antd';
 import RecipeDirectionsEditor from '../components/RecipeDirectionsEditor';
+import RecipeIngredientsEditor from '../components/RecipeIngredientsEditor';
 
 export default class EditRecipe extends React.Component {
   constructor(props) {
@@ -39,8 +40,9 @@ export default class EditRecipe extends React.Component {
         <Form.Item name="recipe-description" label="Description">
           <Input.TextArea />
         </Form.Item>
-        <text>ingredients</text>
-        <br />
+        <Form.Item name="recipe-ingredirents" label="Ingredients">
+          <RecipeIngredientsEditor />
+        </Form.Item>
         <Form.Item name="recipe-directions" label="Directions">
           <RecipeDirectionsEditor />
         </Form.Item>
