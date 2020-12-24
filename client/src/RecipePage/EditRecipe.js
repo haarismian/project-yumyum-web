@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, TimePicker, InputNumber, Input } from 'antd';
+import { Form, TimePicker, InputNumber, Input, Button } from 'antd';
 import RecipeDirectionsEditor from '../components/RecipeDirectionsEditor';
 import RecipeIngredientsEditor from '../components/RecipeIngredientsEditor';
 
@@ -10,9 +10,13 @@ export default class EditRecipe extends React.Component {
     this.state = {};
   }
 
+  onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
   render() {
     return (
-      <Form>
+      <Form onFinish={this.onFinish}>
         <Form.Item name="recipe-prep-time" label="Prep time">
           <TimePicker />
         </Form.Item>
@@ -45,6 +49,11 @@ export default class EditRecipe extends React.Component {
         </Form.Item>
         <Form.Item name="recipe-directions" label="Directions">
           <RecipeDirectionsEditor />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     );

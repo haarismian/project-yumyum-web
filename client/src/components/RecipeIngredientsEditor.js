@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Form, Input, Button, Space } from 'antd';
+import { Form, Input, Button, Space, Select } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+
+const { Option, OptGroup } = Select;
 
 export default class RecipeIngredientsEditor extends React.Component {
   constructor(props) {
@@ -21,21 +23,40 @@ export default class RecipeIngredientsEditor extends React.Component {
                   style={{ display: 'flex', marginBottom: 8 }}
                   align="baseline"
                 >
+                  {' '}
                   <Form.Item
                     {...field}
-                    name={[field.name, 'first']}
-                    fieldKey={[field.fieldKey, 'first']}
-                    rules={[{ required: true, message: 'Missing first name' }]}
+                    name={[field.name, 'ingredient-qty']}
+                    fieldKey={[field.fieldKey, 'ingredient-qty']}
+                    rules={[{ required: true, message: 'Missing last name' }]}
                   >
-                    <Input placeholder="First Name" />
+                    <Input placeholder="Ingredient Quantity" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Select
+                      defaultValue="lucy"
+                      showSearch
+                      style={{ width: 200 }}
+                      // onChange={handleChange}
+                    >
+                      <OptGroup label="Manager">
+                        <Option value="jack">Jack</Option>
+                        <Option value="lucy">Lucy</Option>
+                      </OptGroup>
+                      <OptGroup label="Engineer">
+                        <Option value="Yiminghe">yiminghe</Option>
+                      </OptGroup>
+                    </Select>
                   </Form.Item>
                   <Form.Item
                     {...field}
-                    name={[field.name, 'last']}
-                    fieldKey={[field.fieldKey, 'last']}
-                    rules={[{ required: true, message: 'Missing last name' }]}
+                    name={[field.name, 'ingredient-name']}
+                    fieldKey={[field.fieldKey, 'ingredient-name']}
+                    rules={[
+                      { required: true, message: 'Missing ingredient name' },
+                    ]}
                   >
-                    <Input placeholder="Last Name" />
+                    <Input placeholder="Ingredient Name" />
                   </Form.Item>
                   <MinusCircleOutlined onClick={() => remove(field.name)} />
                 </Space>
@@ -47,17 +68,12 @@ export default class RecipeIngredientsEditor extends React.Component {
                   block
                   icon={<PlusOutlined />}
                 >
-                  Add field
+                  Add ingredient
                 </Button>
               </Form.Item>
             </>
           )}
         </Form.List>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
       </div>
     );
   }
